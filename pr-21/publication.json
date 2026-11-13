@@ -1,0 +1,84 @@
+{
+  "revision": "8bf8c06971949f777efddf82268ca5c37e2c0d25",
+  "unity": "6000.6.9f1",
+  "pipeline": "UniversalRenderPipelineAsset",
+  "graphicsApi": "OpenGLCore",
+  "graphicsDevice": "llvmpipe (LLVM 20.1.2, 256 bits)",
+  "images": [
+    {
+      "file": "13-cell-play-ui.png",
+      "size": 1126765,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "c85aa6cdd8923ddccc05d9a1b50a9de78b08228985b54e764574056639fe84a9",
+      "blob": "2c99e665712bfbb08249b333700f0f9daa814b93"
+    },
+    {
+      "file": "14-cell-info-ui.png",
+      "size": 1108748,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "016be0642ea187129fe3de7f5a8c89b7f14c5b7de526246f3c1895aa0e1b4e25",
+      "blob": "f435f6a4d4e86dcdea3b793d36046d4ac83f758b"
+    },
+    {
+      "file": "15-cinematic-ui.png",
+      "size": 744850,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "8e64dfd141a1625d6fb361e17d4e8dbbc2cc9a30c13abf2a53724581864dc71d",
+      "blob": "928b55af7f4f200fbfabb634507e811988f9f3d8"
+    },
+    {
+      "file": "16-analytical-ui.png",
+      "size": 878182,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "e4cc2bbc256d28a1f601c5a6fe5df6c68be7cfcaaa82f9403a301c0a1db7263a",
+      "blob": "4ddd5f798f0ec20111976f10de14be0cce2446bb"
+    },
+    {
+      "file": "17-danger-food-ui.png",
+      "size": 927011,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "7230f7d458a92fb7ee3580be38c5280fcdc61899e858000a31ad8dc4b56f03df",
+      "blob": "0d3992f748a5d2355935551ef245173df4996cf1"
+    },
+    {
+      "file": "18-scientific-ui.png",
+      "size": 980750,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "29b4173602205da7848019156796548669560da0d6e26b06de30ee187189b8da",
+      "blob": "b7927fbbb4f32defeb5e071cded560c3c5840409"
+    },
+    {
+      "file": "19-ui-1366x768.png",
+      "size": 574113,
+      "width": 1366,
+      "height": 768,
+      "sha256": "db1acccd4e4fde25627a45bcdf1dc6145906a98e378f2f0a11f41ced8ac9579a",
+      "blob": "6a2a1a4869936875259351dede0f3fbd01c0d250"
+    },
+    {
+      "file": "20-ui-2560x1440.png",
+      "size": 1378405,
+      "width": 2560,
+      "height": 1440,
+      "sha256": "10b2d38e8f209184b8d6a49beac1890394be0bd85b70bdc7b8ed485e32fb6cc6",
+      "blob": "57b28c9d18910287ed5b2a2d1156061c9fd96aa1"
+    },
+    {
+      "file": "21-development-ui.png",
+      "size": 833725,
+      "width": 1920,
+      "height": 1080,
+      "sha256": "ea519bc27b50f3ee7c0e6f3f02600c25415a1fadfcd065fd66485a8d2670ab8b",
+      "blob": "1145a4e7ee6157b4e43bf8b67664b0d541e559c5"
+    }
+  ],
+  "run": 43481624085,
+  "artifact": "https://github.com/evgenijzingaev-dev/Evolution/actions/runs/43481624085/artifacts/14066804082",
+  "pr": 21
+}
