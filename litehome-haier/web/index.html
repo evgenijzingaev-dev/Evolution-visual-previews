@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LiteHome Haier Lite — TV simulator</title>
+<style>
+:root{color-scheme:dark;font-family:Arial,Roboto,sans-serif;--focus:#81e2f0}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#080d16;color:white}button{font:inherit;cursor:pointer}
+.shell{max-width:1450px;margin:auto;padding:18px 20px 32px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;padding-bottom:14px}
+.brand{font-weight:800;letter-spacing:-.5px}.brand span{color:var(--focus);font-size:13px;margin-left:9px;letter-spacing:1px}
+.toolbar .info{font-size:13px;color:#aebdcf}
+.tv{position:relative;width:100%;aspect-ratio:16/9;border:9px solid #252c38;border-bottom:16px solid #272c36;border-radius:12px;box-shadow:0 30px 65px #0008,0 2px 0 #475364 inset;overflow:hidden}
+.surface{width:100%;height:100%;position:relative;background:linear-gradient(135deg,#1a2231,#090e19);overflow:hidden}
+.surface.ocean{background:linear-gradient(135deg,#073e52 0%,#0b1526 100%)}.surface.evening{background:linear-gradient(135deg,#38231f,#101420)}
+.surface.photo{background:linear-gradient(130deg,#30486b,#090e19)}
+.content{height:100%;padding:4% 4.5%;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between;gap:2%;margin-bottom:3%}.title{font-weight:800;font-size:clamp(18px,3.2vw,46px);letter-spacing:-.5px;white-space:nowrap}
+.title small{font-size:.4em;color:#81e2f0;letter-spacing:2px;margin-left:12px}
+.clock{font-size:clamp(18px,2.5vw,38px);color:#cad7e6;font-variant-numeric:tabular-nums}
+.subtitle{font-size:clamp(12px,1.55vw,22px);color:#bac7d9;margin-bottom:3%}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:2.5%;flex:1;min-height:0}
+.tile{width:100%;height:100%;min-width:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;text-align:left;padding:8% 11%;background:#24314bbb;border:2px solid #61718e66;border-radius:15px;color:#fff;outline:none}
+.tile .glyph{color:#83e5f3;font-weight:800;font-size:clamp(18px,3vw,42px);line-height:1.2}
+.tile .name{font-size:clamp(12px,2.1vw,30px);font-weight:800;margin-top:4%;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.tile .detail{color:#bac9dc;font-size:clamp(9px,1.15vw,16px);margin-top:3%;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.tile.selected,.setting.selected{background:#26465aeF;border-color:#83e5f3;box-shadow:inset 0 0 0 1px #83e5f3,0 0 22px #43d6ef34}
+.settings{flex:1;display:flex;flex-direction:column;gap:2%;overflow:hidden}.setting{display:flex;align-items:center;text-align:left;min-height:0;flex:1;border:2px solid #61718e66;border-radius:12px;padding:1% 3%;background:#24314bbb;color:#fff;outline:none}
+.setting .arrow{color:#83e5f3;font-size:clamp(20px,2.7vw,40px);margin-right:3%}
+.setting .name{display:block;font-size:clamp(12px,1.8vw,26px);font-weight:800}.setting .detail{display:block;color:#bac9dc;margin-top:2px;font-size:clamp(9px,1vw,16px)}
+.footer{font-size:clamp(10px,1.1vw,16px);color:#aebbd0;margin-top:2.5%;white-space:nowrap}
+.modal-cover{position:absolute;inset:0;background:#000a;display:flex;align-items:center;justify-content:center;padding:6%}.modal{width:min(500px,85%);background:#1c293b;border:2px solid #86deee;padding:24px;border-radius:18px;box-shadow:0 20px 70px #000a}.modal h2{font-size:22px;margin:0 0 12px}.modal p{line-height:1.5;color:#c3d2e2}.modal .hint{color:#80dcea;font-size:13px}.modal button{background:#284f60;color:#fff;border:1px solid #83e5f3;padding:11px 20px;border-radius:10px}
+.bottom{margin-top:15px;display:grid;grid-template-columns:1fr auto;align-items:start;gap:20px}.remote{border:1px solid #354354;border-radius:18px;background:#101927;padding:16px;display:grid;grid-template-columns:repeat(3,60px);grid-template-rows:repeat(3,47px);gap:8px}
+.remote button{border-radius:11px;color:white;border:1px solid #65768b;background:#26344c;font-weight:800;font-size:17px}.remote .ok{background:#1d637b}
+.remote .back{grid-column:span 1}.remote .empty{border:none;background:transparent;pointer-events:none}
+.tips{color:#c4d1de;font-size:14px;line-height:1.6;max-width:720px}
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.controls button{border:1px solid #54708d;border-radius:10px;background:#1d3048;color:#fff;padding:10px 14px}
+.note{font-size:12px;color:#879ab0}
+@media(max-width:720px){.shell{padding:8px}.tv{border-width:5px;border-bottom-width:9px}.content{padding:4.5%}.top{margin-bottom:2%}.tile{border-width:1px;border-radius:7px}.tile .name{margin-top:3%}.footer{margin-top:1.5%}.bottom{grid-template-columns:1fr}.remote{justify-self:center}.tips{font-size:13px}.settings{gap:1%}.setting{border-width:1px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="toolbar"><div class="brand">LiteHome <span>HAIER LITE · ЭМУЛЯТОР</span></div><div class="info">Android TV · внешний вид и навигация · 16:9</div></div>
+<div class="tv" aria-label="Экран телевизора Haier"><div class="surface" id="surface"><div class="content">
+<div class="top"><div class="title" id="title">LiteHome <small>HAIER LITE</small></div><div class="clock" id="clock">23:10</div></div>
+<div class="subtitle" id="subtitle">Ваш телевизор. Ничего лишнего.</div>
+<div id="main" class="tiles"></div><div class="footer" id="footer">OK — выбрать · BACK — назад · SOURCE — ТВ / HDMI</div>
+</div><div id="overlay" hidden></div></div></div>
+<div class="bottom"><div><div class="tips">Управление: <b>↑ ↓ ← →</b> — перемещение, <b>Enter</b> — OK, <b>Esc</b> — назад. На телефоне можно нажимать на плитки или использовать пульт справа.</div>
+<div class="controls"><button id="reset">Главная</button><button id="settingsBtn">Настройки</button><button id="source">SOURCE</button></div><div class="note">Это браузерный симулятор интерфейса, а не Android APK и не реальная прошивка Haier. Подлинные Android-скриншоты создаёт GitHub Actions.</div></div>
+<div class="remote" aria-label="Виртуальный пульт"><div class="empty"></div><button data-key="up">▲</button><div class="empty"></div><button data-key="left">◀</button><button class="ok" data-key="ok">OK</button><button data-key="right">▶</button><button data-key="back">BACK</button><button data-key="down">▼</button><button data-key="source">SOURCE</button></div></div>
+</div>
+<script>
+const home=[["TV","Телеканалы","Кабельное и эфирное ТВ"],["▶","Zona","Фильмы и сериалы"],["▦","Приложения","Все установленные"],["⌕","Поиск","Фильмы в интернете"],["◈","Источники","TV / HDMI / AV"],["⚙","Настройки","Обои и быстрый запуск"]];
+const settings=[["›","Обои","Градиент или своя фотография"],["›","Приложение телеканалов","Назначить кнопку ТВ"],["›","Приложение Zona","Назначить кнопку Zona"],["›","Приложение источников","Не заменяет кнопку SOURCE"],["›","Часы-заставка","Простые часы на тёмном фоне"],["›","Погода","Открыть в браузере"],["›","Системные настройки","Настройки Android / Haier"]];
+const apps=[["▦","Zona","Демонстрация"],["▦","YouTube","Демонстрация"],["▦","Браузер","Демонстрация"]];
+let page="home", focus=0, palette="default", menu=null;
+function clock(){document.getElementById("clock").textContent=new Date().toLocaleTimeString("ru-RU",{hour:"2-digit",minute:"2-digit"});}
+function items(){return page==="settings"?settings:page==="apps"?apps:home;}
+function render(){const list=items();const el=document.getElementById("main");document.getElementById("surface").className="surface "+palette;
+const custom=page==="settings"||page==="apps";el.className=custom?"settings":"tiles";document.getElementById("title").innerHTML=page==="home"?'LiteHome <small>HAIER LITE</small>':page==="settings"?"Настройки LiteHome":"Приложения";
+document.getElementById("subtitle").textContent=page==="home"?"Ваш телевизор. Ничего лишнего.":page==="apps"?"Демонстрационный список, не установленные программы":"";document.getElementById("footer").textContent=page==="home"?"OK — выбрать · BACK — назад · SOURCE — ТВ / HDMI":"BACK — главный экран · SOURCE — ТВ / HDMI";
+el.innerHTML=list.map((it,i)=>'<button class="'+(custom?"setting":"tile")+(i===focus?' selected':'')+'" data-idx="'+i+'">'+(custom?'<span class="arrow">'+it[0]+'</span><span>':'')+'<span class="glyph"'+(custom?' style="display:none"':'')+'>'+it[0]+'</span><span class="name">'+it[1]+'</span><span class="detail">'+it[2]+'</span>'+(custom?'</span>':'')+'</button>').join('');
+el.querySelectorAll("button").forEach(b=>b.onclick=()=>{focus=+b.dataset.idx;render();activate();});
+}
+function showModal(title,desc,hint="OK или BACK — закрыть"){menu={title,desc};let overlay=document.getElementById("overlay");overlay.hidden=false;overlay.className="modal-cover";overlay.innerHTML='<div class="modal"><h2>'+title+'</h2><p>'+desc+'</p><div class="hint">'+hint+'</div><p><button id="close">Закрыть</button></p></div>';overlay.querySelector("#close").onclick=close;}
+function close(){menu=null;const overlay=document.getElementById("overlay");overlay.hidden=true;overlay.innerHTML="";}
+function route(p){close();page=p;focus=0;render();}
+function activate(){if(menu){close();return;}const value=items()[focus]?.[1];if(!value)return;
+if(page==="home"){if(value==="Настройки")route("settings");else if(value==="Приложения")route("apps");else if(value==="Телеканалы")showModal("Телеканалы","На настоящем Haier используется назначенное приложение ТВ, либо штатная кнопка SOURCE.");else if(value==="Zona")showModal("Zona","Здесь LiteHome запускает установленное приложение Zona. В веб-эмуляторе внешние APK не запускаются.");else if(value==="Источники")source();else showModal(value,"Эта функция запускается в настоящем Android-приложении.");}
+else if(page==="settings"){if(value==="Обои"){const all=["default","ocean","evening","photo"];palette=all[(all.indexOf(palette)+1)%all.length];render();showModal("Обои","Фон переключён: "+({"default":"Графит","ocean":"Океан","evening":"Тёплый вечер","photo":"Демо-фон фото"}[palette])+". На телевизоре также можно выбрать свою фотографию.");}else showModal(value,"На реальном телевизоре открывается соответствующая системная функция. Эмулятор не меняет настройки Haier.");}
+else showModal(value,"Это демонстрационная плитка. Реальная программа запускается из установленного приложения.");}
+function source(){showModal("Кнопка SOURCE","В реальном телевизоре эта кнопка открывает штатный выбор кабельного ТВ, HDMI или AV. В браузере управлять тюнером невозможно.");}
+function move(dir){if(menu){if(dir==="back"||dir==="ok")close();return;}if(dir==="back"){route("home");return;}if(dir==="source"){source();return;}if(dir==="ok"){activate();return;}
+const size=items().length,cols=page==="home"?3:1;let row=Math.floor(focus/cols),col=focus%cols;
+if(dir==="up")row=Math.max(0,row-1);if(dir==="down")row=Math.min(Math.ceil(size/cols)-1,row+1);if(dir==="left")col=Math.max(0,col-1);if(dir==="right")col=Math.min(cols-1,col+1);
+focus=Math.min(size-1,row*cols+col);render();}
+document.querySelectorAll("[data-key]").forEach(b=>b.onclick=()=>move(b.dataset.key));
+document.getElementById("reset").onclick=()=>route("home");document.getElementById("settingsBtn").onclick=()=>route("settings");document.getElementById("source").onclick=source;
+document.addEventListener("keydown",e=>{const m={ArrowUp:"up",ArrowDown:"down",ArrowLeft:"left",ArrowRight:"right",Enter:"ok",Escape:"back",Backspace:"back"};if(m[e.key]){e.preventDefault();move(m[e.key]);}});
+clock();setInterval(clock,30000);render();
+</script></body></html>
