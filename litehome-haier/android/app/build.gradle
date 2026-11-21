@@ -1,0 +1,16 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.litehome.haierlite'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.litehome.haierlite'
+        minSdk 24
+        targetSdk 28
+        versionCode 1
+        versionName '1.0-emulator'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
