@@ -1,0 +1,16 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.haier.zonaweblite'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.haier.zonaweblite'
+        minSdk 24
+        targetSdk 28
+        versionCode 1
+        versionName '0.1-test'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
